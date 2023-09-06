@@ -6,7 +6,6 @@ import Container from '../components/Container';
 import CardList from '../components/CardList';
 import Line from '../components/Line';
 import CardReverse from '../components/CardReverse';
-import Footer from '../components/Footer';
 
 const Home = () => {
   return (
@@ -16,7 +15,6 @@ const Home = () => {
       <Line />
       <CardList />
       <CardReverse cardImg={girl2} h1text={'New Collections Available'} moreInfo={'Shop with us and get amazing discount on first time purchase'} />
-      <Footer />
     </div>
   );
 };

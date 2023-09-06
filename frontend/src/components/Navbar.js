@@ -63,13 +63,13 @@ const Navbar = () => {
                     </Link>
                     </li>
                     <li className="text-gray-600">
-                    <Link className="border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300 mx-1.5 sm:mx-6 text-xs" to="/about">
-                      About
+                    <Link className="border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300 mx-1.5 sm:mx-6 text-xs" to="/product">
+                      Products
                     </Link>
                     </li>
                     <li className="text-gray-600">
-                    <Link className="border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300 mx-1.5 sm:mx-6 text-xs" to="/product">
-                      Products
+                    <Link className="border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300 mx-1.5 sm:mx-6 text-xs" to="/about">
+                      About
                     </Link>
                     </li>
                     <li className="text-gray-600">

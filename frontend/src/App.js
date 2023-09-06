@@ -8,6 +8,7 @@ import Product from './pages/Product';
 import ProductDetail from './pages/ProductDetail';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
+import Footer from './components/Footer';
 
 function App () {
   return (
@@ -18,10 +19,11 @@ function App () {
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/product' element={<Product />} />
-        <Route path='/product:id' element={<ProductDetail />} />
+        <Route path='/product/:id' element={<ProductDetail />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<SignUp />} />
+        <Route path='/register' element={<SignUp />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
