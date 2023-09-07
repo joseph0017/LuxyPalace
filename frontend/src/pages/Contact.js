@@ -37,8 +37,8 @@ const Contact = () => {
             <h2 className='text-3xl font-semibold tracking-tight text-gray-800 dark:text-white'>Address</h2>
             <p className='mt-3 text-gray-500 dark:text-gray-300'>
               You can find us at this address.
-              <address>17 kurosaki street shibuya, tokyo, Japan.</address>
             </p>
+            <address className='text-gray-500 dark:text-gray-300'>17 kurosaki street shibuya, tokyo, Japan.</address>
           </div>
           <div className='flex flex-col items-center max-w-lg mx-auto text-center'>
             <img src={Phone} alt='phone' className='w-10' />
