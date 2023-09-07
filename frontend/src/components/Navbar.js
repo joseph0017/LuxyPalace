@@ -1,6 +1,7 @@
 
 import React, {useState} from "react";
 import { Link } from "react-router-dom";
+import shoppingCart from '../images/shopping-cart.png';
 
 const Navbar = () => {
   const [navbar, setNavbar] = useState(false);
@@ -9,7 +10,7 @@ const Navbar = () => {
     <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
-            <Link to="/" className="pl-8 sm:text-xs italic font-medium cursor-pointer ">
+            <Link to="/" className="pl-8 sm:text-base italic font-medium cursor-pointer ">
                 LuxyPalace
             </Link>
                 <div className="md:hidden">
@@ -58,22 +59,22 @@ const Navbar = () => {
             >
                 <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0 cursor-pointer">
                     <li className="text-gray-600 ">
-                    <Link className="border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300 mx-1.5 sm:mx-6 text-xs" to="/">
+                    <Link className="border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300 mx-1.5 sm:mx-6 text-base" to="/">
                       Home
                     </Link>
                     </li>
                     <li className="text-gray-600">
-                    <Link className="border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300 mx-1.5 sm:mx-6 text-xs" to="/product">
+                    <Link className="border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300 mx-1.5 sm:mx-6 text-base" to="/product">
                       Products
                     </Link>
                     </li>
                     <li className="text-gray-600">
-                    <Link className="border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300 mx-1.5 sm:mx-6 text-xs" to="/about">
+                    <Link className="border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300 mx-1.5 sm:mx-6 text-base" to="/about">
                       About
                     </Link>
                     </li>
                     <li className="text-gray-600">
-                    <Link className="border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300 mx-1.5 sm:mx-6 text-xs" to="/contact">
+                    <Link className="border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300 mx-1.5 sm:mx-6 text-base" to="/contact">
                       Contact
                     </Link>
                     </li>
@@ -81,12 +82,15 @@ const Navbar = () => {
             </div>
         </div>
 
-        {/* <div className='mr-30 sm:text-xs pt-10 md:pt-0 '>
+        <div className='inline-flex  ml-12 sm:text-base pt-4 md:pt-0  '>
                       Welcome Joey
-                    </div> */}
-        <Link className='mr-30 sm:text-xs pt-10 md:pt-0 ' to='login'>
+                      <img src={shoppingCart} alt="cart" className="w-5 mt-1 ml-6" />
+                    </div>
+                    <p className="py-6 cursor-pointer border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300">Sign Out</p>
+        
+        {/* <Link className='border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300 mx-1.5 sm:mx-6 text-base' to='/login'>
                       Log in
-                    </Link>
+                    </Link> */}
                         
     </div>
 </nav>

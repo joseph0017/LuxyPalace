@@ -11,7 +11,7 @@ const Contact = () => {
       <div className=' lg:py-12 lg:flex lg:justify-center mt-20'>
         <div className='overflow-hidden bg-white dark:bg-gray-900 lg:mx-8 lg:flex lg:max-w-6xl lg:w-full lg:shadow-md lg:rounded-xl'>
           <div className='lg:w-1/2'>
-            <img className='h-64 bg-cover lg:h-full' src={customerSupport} alt='customer support' />
+            <img className='bg-cover lg:h-full' src={customerSupport} alt='customer support' />
           </div>
           <div className='max-w-xl px-6 py-12 lg:max-w-5xl lg:w-1/2'>
             <h2 className='text-2xl mt-10 font-semibold text-gray-800 dark:text-white md:text-3xl'>CUSTOMER SUPPORT</h2>
@@ -22,7 +22,7 @@ const Contact = () => {
         </div>
       </div>
       <section className='bg-white dark:bg-gray-900'>
-        <div className='container grid grid-cols-1 gap-8 px-4 py-12 mx-auto lg:grid-cols-3'>
+        <div className=' grid grid-cols-1 gap-8 px-4 py-12 mx-auto lg:grid-cols-3 lg:shadow-md rounded-lg'>
           <div className='flex flex-col items-center max-w-lg mx-auto text-center'>
             <img src={email} alt='email' className='w-10' />
             <h2 className='text-3xl font-semibold tracking-tight text-gray-800 dark:text-white'>Email</h2>
