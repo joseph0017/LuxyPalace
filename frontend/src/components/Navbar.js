@@ -82,15 +82,15 @@ const Navbar = () => {
             </div>
         </div>
 
-        <div className='inline-flex  ml-12 sm:text-base pt-4 md:pt-0  '>
+        {/* <div className='inline-flex  ml-12 sm:text-base pt-4 md:pt-0  '>
                       Welcome Joey
                       <img src={shoppingCart} alt="cart" className="w-5 mt-1 ml-6" />
                     </div>
                     <p className="py-6 cursor-pointer border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300">Sign Out</p>
-        
-        {/* <Link className='border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300 mx-1.5 sm:mx-6 text-base' to='/login'>
+         */}
+        <Link className='border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300 mx-1.5 sm:mx-6 text-base' to='/login'>
                       Log in
-                    </Link> */}
+                    </Link>
                         
     </div>
 </nav>

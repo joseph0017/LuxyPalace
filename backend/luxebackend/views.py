@@ -5,6 +5,7 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from .serializers import UserSerializer
+from django.http import JsonResponse
 
 
 @api_view(['POST'])
@@ -15,6 +16,7 @@ def login(request):
     token, created = Token.objects.get_or_create(user=user)
     serializer = UserSerializer(instance=user)
     return Response({"token": token.key, "user": serializer.data})
+    return JsonResponse({'message': 'Logged in!'})
 
 @api_view(['POST'])
 def signup(request):
