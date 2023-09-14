@@ -1,17 +1,8 @@
 import { userActionTypes } from './user-types';
 
-export const setCurrentUser = (user) => ({
-  type: userActionTypes.SET_CURRENT_USER,
-  payload: user
-});
-
 export const login = (username, password) => ({
   type: userActionTypes.LOGIN,
   payload: {username, password}
-});
-
-export const logout = () => ({
-  type: userActionTypes.LOGOUT
 });
 
 export const loginSuccess = (tokens) => ({
@@ -22,6 +13,11 @@ export const loginSuccess = (tokens) => ({
 export const loginFailure = () => ({
   type: userActionTypes.LOGIN_FAILURE
 });
+
+export const logout = () => ({
+  type: userActionTypes.LOGOUT
+});
+
 export const signup = (username, password, email) => ({
   type: userActionTypes.SIGNUP,
   payload: {username, password, email}
@@ -55,19 +51,15 @@ export const loginRequest = (username, password) => {
       }
     })
     .then(data => {
-      // console.log(data);
-      // console.log('hey joe this is the token', data.token)
-      // Check if data.token exists and is a string
       if (data && typeof data.token === 'string') {
 
         dispatch(loginSuccess(data.token))
         localStorage.setItem('token', data.token)
-        // window.location.replace('/')
       } else {
         console.error('Token is not defined or not a string:', data.token);
       }
     })
-    .catch(dispatch(loginFailure));
+    .catch(dispatch(loginFailure()));
   };
 };
 
@@ -89,18 +81,21 @@ export const signupRequest = (username, password, email) => {
       }
     })
     .then(data => {
-      // console.log(data);
-      // console.log('hey joe this is the token', data.token)
-      // Check if data.token exists and is a string
       if (data && typeof data.token === 'string') {
 
         dispatch(signupSuccess(data.token))
         localStorage.setItem('token', data.token)
-        // window.location.replace('/')
       } else {
         console.error('Token is not defined or not a string:', data.token);
       }
     })
-    .catch(dispatch(signupFailure));
+    .catch(dispatch(signupFailure()));
   };
 };
+
+export const logoutRequest = () => {
+  return (dispatch) => {
+    localStorage.removeItem('token');
+    dispatch(logout())
+  }
+}

@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loginRequest } from '../redux/user/user-actions';
+import { loginRequest, logoutRequest } from '../redux/user/user-actions';
 
-const Login = ({user, login}) => {
+const Login = ({user, login,}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
     login(username, password)
+    navigate('/')
   }
+
   return (
     <div>
+      {/* <p onClick={handleLogout}>LOGOUT HERE!!</p> */}
       <section className='bg-gray-50 dark:bg-gray-900'>
         <div className='flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0'>
           <div className='w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700'>
@@ -28,7 +33,7 @@ const Login = ({user, login}) => {
                     name='username'
                     id='username'
                     className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-                    placeholder='name@company.com'
+                    placeholder='Your username'
                     required='' 
                     onChange={(e) => setUsername(e.target.value, console.log(e.target.value))}
                     />
@@ -75,7 +80,8 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    login: (username, password) => dispatch(loginRequest(username, password))
+    login: (username, password) => dispatch(loginRequest(username, password)),
+    logoutUser: () => dispatch(logoutRequest())
   };
 }
 

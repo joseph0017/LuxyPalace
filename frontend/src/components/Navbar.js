@@ -1,10 +1,19 @@
 
 import React, {useState} from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import shoppingCart from '../images/shopping-cart.png';
+import { logoutRequest } from "../redux/user/user-actions";
+import { connect } from "react-redux";
 
-const Navbar = () => {
+const Navbar = ({user, logoutUser}) => {
   const [navbar, setNavbar] = useState(false);
+
+  const nanvigate = useNavigate()
+
+    const handleLogout = () => {
+    logoutUser()
+    nanvigate('/')
+  }
   return (
     <nav className="w-full bg-white shadow">
     <div className="justify-between px-4 mx-auto lg:max-w-7xl lg:items-center lg:flex lg:px-8">
@@ -82,19 +91,40 @@ const Navbar = () => {
             </div>
         </div>
 
-        {/* <div className='inline-flex  ml-12 sm:text-base pt-4 md:pt-0  '>
-                      Welcome Joey
+        
+         { user ? (
+            <>
+         <div className='inline-flex  ml-12 sm:text-base pt-4 md:pt-0  '>
+                      Welcome <span className="ml-4"> {user.username} </span> 
                       <img src={shoppingCart} alt="cart" className="w-5 mt-1 ml-6" />
                     </div>
-                    <p className="py-6 cursor-pointer border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300">Sign Out</p>
-         */}
-        <Link className='border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300 mx-1.5 sm:mx-6 text-base' to='/login'>
+                    <p className="py-6 cursor-pointer border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300"
+                    onClick={handleLogout}
+                    >
+                        Sign Out</p>
+                    </>
+        ) : (
+            <Link className='border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300 mx-1.5 sm:mx-6 text-base' to='/login'>
                       Log in
                     </Link>
-                        
+        )
+        }               
     </div>
 </nav>
   );
 };
 
-export default Navbar;
+
+function mapStateToProps (state) {
+  return {
+    user: state.user.user
+  };
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    logoutUser: () => dispatch(logoutRequest())
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
