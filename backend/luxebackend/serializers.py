@@ -9,8 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class JewelrySerializer(serializers.ModelSerializer):
-    owner = ClientSerializer()  
 
     class Meta:
         model = Jewelry
-        fields = ('id', 'name', 'price', 'image', 'description', 'category', 'created_at', 'updated_at', 'owner')
+        fields = ['id', 'name', 'price', 'image', 'description', 'category', 'created_at', 'updated_at', 'owner']

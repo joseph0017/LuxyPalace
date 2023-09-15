@@ -41,11 +41,7 @@ def test_token(request):
     return Response("Passed for {}".format(request.user.email))
 
 @api_view(['GET'])
-def jewelry_list(request):
-    jewelries = Jewelry.objects.all()
-    return render(request, 'jewelry_list.html', {'jewelries': jewelries})
-
-@api_view(['GET'])
-def jewelry_detail(request, pk):
-    jewelry = get_object_or_404(Jewelry, pk=pk)
-    return render(request, 'jewelry_detail.html', {'jewelry': jewelry})
+def jewelry_list(request, *args, **kwargs):
+    jewelries = Jewelry.objects.all().order_by('-id')
+    serializer = JewelrySerializer(Jewelry, many=True)
+    return Response(serializer.data)

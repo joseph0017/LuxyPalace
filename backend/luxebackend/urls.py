@@ -8,5 +8,4 @@ urlpatterns = [
     re_path('signup', views.signup),
     re_path('test_token', views.test_token),
     re_path('jewelries/', views.jewelry_list, name='jewelry_list'),
-    re_path('jewelries/<int:pk>/', views.jewelry_detail, name='jewelry_detail'),
 ]
