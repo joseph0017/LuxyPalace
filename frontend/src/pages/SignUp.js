@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signupRequest } from '../redux/user/user-actions';
 
@@ -9,11 +9,19 @@ const [password, setPassword] = useState('');
 const [password2, setPassword2] = useState('');
 const [email, setEmail] = useState('');
 
+  const navigate =  useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signup(username, password, email);
+    if (password !== password2) {
+      alert('passwords do not match')
+    } else {
+      signup(username, password, email);
+    navigate('/')
+
+    }
   };
+
   return (
     <div>
       <section className='bg-gray-50 dark:bg-gray-900'>

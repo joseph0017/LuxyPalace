@@ -1,9 +1,10 @@
 import React from 'react';
+import SearchBar from '../components/SearchBar';
 
 const Product = () => {
   return (
     <div>
-      Product
+      <SearchBar />
     </div>
   );
 };
