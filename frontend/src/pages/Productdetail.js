@@ -1,33 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import shoppingCart from '../images/shopping-cart.png';
+import { connect } from 'react-redux';
+import { getSingleProduct } from '../redux/product/product-actions';
+import { createStructuredSelector } from 'reselect';
+import { selectSingleProduct } from '../redux/product/product-selectors';
 
-const ProductDetail = () => {
+const ProductDetail = ({fetchProduct, product}) => {
 
-  const {id} = useParams()
-
-    const [product, setProduct] = useState({});
-
-  const getProduct = async () => {
-    try {
-      const response = await fetch('http://127.0.0.1:8000/jewelry/' + id);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      setProduct(data); 
-    } catch (error) {
-      console.log('There was a problem with the fetch operation: ' + error.message);
-    }
-  }
+  const {id} = useParams();
 
   useEffect(() => {
-    getProduct();
+    fetchProduct(id);
   }
-  ,[])
+    , [fetchProduct, id]);
+
   return (
-    <>
-      <div key={product.id} className='container px-6 py-16 mx-auto bg-gradient-to-t from-orange-100 mt-20 mb-48'>
+    <div key={product.id} className='container px-6 py-16 mx-auto bg-gradient-to-t from-orange-100 mt-20 mb-48'>
       <div className='items-center lg:flex'>
         <div className='flex items-center justify-center w-full mt-6 lg:mt-0 lg:w-1/2'>
           <img className='w-96 h-full lg:max-w-3xl rounded-lg' src={product.image} alt='Catalogue-pana.svg' />
@@ -63,9 +52,18 @@ const ProductDetail = () => {
         </div>
       </div>
     </div>
-    
-    </>
   );
 };
 
-export default ProductDetail;
+const mapStateToProps = createStructuredSelector({
+  product: selectSingleProduct
+
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchProduct: (id) => dispatch(getSingleProduct(id))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);
