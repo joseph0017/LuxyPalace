@@ -1,22 +1,45 @@
-import React from 'react';
-import pearl from '../images/luisana-galicia.jpg';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom'
 import shoppingCart from '../images/shopping-cart.png';
 
 const ProductDetail = () => {
+
+  const {id} = useParams()
+
+    const [product, setProduct] = useState({});
+
+  const getProduct = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:8000/jewelry/' + id);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      setProduct(data); 
+    } catch (error) {
+      console.log('There was a problem with the fetch operation: ' + error.message);
+    }
+  }
+
+  useEffect(() => {
+    getProduct();
+  }
+  ,[])
   return (
-    <div className='container px-6 py-16 mx-auto bg-gradient-to-t from-orange-100 '>
+    <>
+      <div key={product.id} className='container px-6 py-16 mx-auto bg-gradient-to-t from-orange-100 mt-20 mb-48'>
       <div className='items-center lg:flex'>
         <div className='flex items-center justify-center w-full mt-6 lg:mt-0 lg:w-1/2'>
-          <img className='w-96 h-full lg:max-w-3xl rounded-lg' src={pearl} alt='Catalogue-pana.svg' />
+          <img className='w-96 h-full lg:max-w-3xl rounded-lg' src={product.image} alt='Catalogue-pana.svg' />
         </div>
         <div className='w-full lg:w-1/2'>
           <div className='lg:max-w-lg'>
-            <h1 className='text-3xl font-semibold text-gray-800 dark:text-white lg:text-4xl'>Fall Limited Edition Gold Rings</h1>
+            <h1 className='text-3xl font-semibold text-gray-800 dark:text-white lg:text-4xl'>{product.name}</h1>
             <p className='mt-3 text-gray-600 dark:text-gray-400'>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro beatae error laborum ab amet sunt recusandae? Reiciendis natus perspiciatis optio.
+              {product.description}
             </p>
             <p className='text-2xl mt-10 mr-96'>
-              <b>$200.00</b>
+              <b>${product.price}</b>
             </p>
             <div className='flex items-center'>
               <div className='container rounded-full w-48 mt-14 bg-slate-200 cursor-pointer'>
@@ -40,6 +63,8 @@ const ProductDetail = () => {
         </div>
       </div>
     </div>
+    
+    </>
   );
 };
 
