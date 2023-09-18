@@ -1,39 +1,82 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import SearchBar from '../components/SearchBar';
+import CardProduct from '../components/CardProduct';
+import { Link } from 'react-router-dom';
 
-const Product = () => {
-  const [products, setProducts] = useState([]);
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectAllProduct, selectAllProductCopy, selectCategory, selectSearch } from '../redux/product/product-selectors';
+import { getAllProducts, setSearch, setCategory, allProducts } from '../redux/product/product-actions';
 
-  const getProduct = async () => {
-    try {
-      const response = await fetch('http://127.0.0.1:8000/jewelry-list/');
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      setProducts(data);  // Update the state with the fetched data
-    } catch (error) {
-      console.log('There was a problem with the fetch operation: ' + error.message);
+const Product = ({products, productCopy, search, category, setFilteredProducts, setSearch, fetchAllProducts}) => {
+
+  const filterSearch = (e) => {
+    const keyword = e.target.value;
+
+    if (keyword !== '') {
+      const results = productCopy.filter((product) => {
+        return product.name.toLowerCase().startsWith(keyword.toLowerCase());
+      // Use the toLowerCase() method to make it case-insensitive
+      });
+      setFilteredProducts(results);
+    } else {
+      setFilteredProducts(productCopy);
+    // return all products
     }
+    setSearch(keyword);
+  };
+
+  const filterCategory = (keyword) => {
+    if (keyword !== '') {
+      const results = productCopy.filter((product) => {
+        return product.category === keyword;
+      });
+      setFilteredProducts(results);
+    } else {
+      setFilteredProducts(productCopy);
+    }
+    setCategory(keyword);
+  };
+
+  useEffect(() => {
+    fetchAllProducts();
   }
+    , [fetchAllProducts]);
 
   return (
     <div>
-      <SearchBar />
-      <div onClick={getProduct}>
-        CLICK HERE JOE
+      <SearchBar
+        search={search}
+        filterSearch={filterSearch}
+        filterCategory={filterCategory}
+        category={category} />
+      <div className='grid grid-cols-3 gap-4 mt-20'>
+        {products && products.map(product => (
+           <div className='col-span-1 mb-20' key={product.id}>
+             <Link to={`/product/${product.id}`}>
+             <CardProduct name={product.name} productImg={product.image} price={product.price} />
+             </Link>
+           </div>
+         ))}
       </div>
-      {products.map(product => (
-        <div key={product.id}>
-          <h2>{product.name}</h2>
-          <p>{product.description}</p>
-          <p>{product.price}</p>
-          <img src={product.image} alt="nothing" />
-          {/* Add more fields as needed */}
-        </div>
-      ))}
     </div>
   );
 };
 
-export default Product;
+const mapStateToProps = createStructuredSelector({
+  products: selectAllProduct,
+  productCopy: selectAllProductCopy,
+  search: selectSearch,
+  category: selectCategory
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchAllProducts: () => dispatch(getAllProducts()),
+    setFilteredProducts: (dataCopy) => dispatch(allProducts(dataCopy)),
+    setSearch: (keyword) => dispatch(setSearch(keyword)),
+    setCategory: (keyword) => dispatch(setCategory(keyword))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Product);
