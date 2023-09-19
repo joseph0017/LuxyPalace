@@ -5,7 +5,6 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from .serializers import UserSerializer
-from .models import Jewelry
 
 
 
@@ -39,9 +38,3 @@ from rest_framework.permissions import IsAuthenticated
 @permission_classes([IsAuthenticated])
 def test_token(request):
     return Response("Passed for {}".format(request.user.email))
-
-@api_view(['GET'])
-def jewelry_list(request, *args, **kwargs):
-    jewelries = Jewelry.objects.all().order_by('-id')
-    serializer = JewelrySerializer(Jewelry, many=True)
-    return Response(serializer.data)
