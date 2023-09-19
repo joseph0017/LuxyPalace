@@ -1,4 +1,5 @@
 import { productActionTypes } from './product-types';
+// confirm
 
 export const products = (data) => ({
   type: productActionTypes.GET_PRODUCT,
