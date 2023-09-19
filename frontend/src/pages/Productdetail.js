@@ -34,13 +34,13 @@ const ProductDetail = ({fetchProduct, product, addItem, removeItem, countProduct
             <p className='mt-3 text-gray-600 dark:text-gray-400'>
               {product.description}
             </p>
-            <p className='text-2xl mt-10 mr-96 sm:ml-48 md:ml-72 lg:ml-0'>
+            <p className='text-2xl mt-10 mr-96 sm:ml-56 md:ml-72 lg:ml-0'>
               <b>${product.price}</b>
             </p>
-            <div className='flex items-center sm:ml-28 md:ml-48 lg:ml-0 '>
-              <div className=' rounded-full mt-14 bg-slate-200 cursor-pointer lg:px-2'>
+            <div className='flex items-center sm:ml-20 md:ml-48 lg:ml-0'>
+              <div className=' rounded-full mt-14 bg-slate-200 cursor-pointer sm:px-4 lg:px-2'>
                 <div className='flex items-center'>
-                  <p className='text-3xl pl-3 mb-2 cursor-pointer mr-1 lg:mr-5 lg:font-semibold ' onClick={() => removeItem(product)}>
+                  <p className='text-3xl pl-2 mb-2 cursor-pointer mr-1 lg:mr-5 lg:font-semibold ' onClick={() => removeItem(product)}>
                     -
                   </p>
                   <p className='text-2xl ml-5 cursor-pointer lg:mr-3 lg:font-semibold'>
@@ -51,7 +51,7 @@ const ProductDetail = ({fetchProduct, product, addItem, removeItem, countProduct
                   </p>
                 </div>
               </div>
-              <button className='text-xl bg-orange-300 rounded-full flex flex-start mt-14 hover:bg-orange-200 ml-10 py-2 px-1 lg:px-12 lg:py-3 xl:ml-20'
+              <button className='text-xl bg-orange-300 rounded-full flex flex-start mt-14 hover:bg-orange-200 ml-10 py-2 px-1 sm:px-7 sm:ml-24 xl:px-12 lg:py-3 xl:ml-20'
               onClick={() => addItem(product)}
               >
                 <img src={shoppingCart} alt='cart' className='w-6 mt-1 mr-5' /> Add to cart

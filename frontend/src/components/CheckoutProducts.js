@@ -1,10 +1,8 @@
 import React from 'react';
-import { selectCartTotal } from '../redux/cart/cart-selectors';
-import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { addItem, clearItemFromCart, removeItem } from '../redux/cart/cart-actions';
 
-const CheckoutProducts = ({cartItem, total, addProducts, removeProducts, clearProducts}) => {
+const CheckoutProducts = ({cartItem, addProducts, removeProducts, clearProducts}) => {
   return (
     <div className='flex flex-col md:flex-row '>
       <div className='bg-white rounded-lg shadow-md mb-4'>
@@ -19,9 +17,6 @@ const CheckoutProducts = ({cartItem, total, addProducts, removeProducts, clearPr
               </th>
               <th className='text-left font-semibold pr-5 md:pr-10'>
                 Quantity
-              </th>
-              <th className='text-left font-semibold lg:pr-5 '>
-                Total
               </th>
               <th className='text-left font-semibold lg:pr-10'>
                 Clear Cart
@@ -51,10 +46,6 @@ const CheckoutProducts = ({cartItem, total, addProducts, removeProducts, clearPr
                   </button>
                 </div>
               </td>
-              <td className='py-4 text-xs sm:text-base'>
-                $
-                {total}
-              </td>
               <td className='py-4 text-xl cursor-pointer' onClick={() => clearProducts(cartItem)}>
                 X
               </td>
@@ -66,9 +57,6 @@ const CheckoutProducts = ({cartItem, total, addProducts, removeProducts, clearPr
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  total: selectCartTotal
-});
 
 const mapDispatchToProps = (dispatch) => ({
   clearProducts: (product) => dispatch(clearItemFromCart(product)),
@@ -76,4 +64,4 @@ const mapDispatchToProps = (dispatch) => ({
   removeProducts: (product) => dispatch(removeItem(product))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CheckoutProducts);
+export default connect(null, mapDispatchToProps)(CheckoutProducts);

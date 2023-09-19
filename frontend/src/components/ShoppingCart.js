@@ -14,8 +14,8 @@ const ShoppingCart = ({toggleCartHidden, hidden, itemCount}) => {
         src={shoppingCart}
         alt='cart'
         onClick={toggleCartHidden}
-        className='h-10 w-10 mt-1 ml-6 cursor-pointer' />
-      {/* <span className=''>{itemCount}</span> */}
+        className='h-12 w-12 mt-1 ml-6 cursor-pointer' />
+      {/* <span className=' mr-3 mt-3 font-medium absolute'>{itemCount}</span> */}
       {hidden ? null : <CartDropdown />}
     </div>
   );
