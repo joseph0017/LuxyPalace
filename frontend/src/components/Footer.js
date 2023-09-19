@@ -5,7 +5,7 @@ import instagram from '../images/instagram.png';
 
 const Footer = () => {
   return (
-    <div className='conatiner bg-orange-300 pt-10 mt-16  '>
+    <div className='conatiner bg-orange-300 pt-10 mt-16'>
       <div className='flex justify-evenly cursor-pointer'>
         <img src={twitter} alt='twitter' className='w-6 ml-10' />
         <img src={instagram} alt='instagram' className='w-6' />

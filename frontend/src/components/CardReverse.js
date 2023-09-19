@@ -17,12 +17,13 @@ const CardReverse = ({cardImg, h1text, moreInfo}) => {
                     Don't forget to visit our product page for inspiration and see what we have to offer
                   </p>
                 </div>
-                <button className='rounded-full bg-slate-300 py-2 px-6 text-lg font-medium hover:bg-slate-200 sm:mb-10'>
+                <button className='mb-10 rounded-full bg-slate-300 py-2 px-6 text-lg font-medium hover:bg-slate-200 sm:mb-10'>
                   Learn More
                 </button>
               </div>
               <div className='lg:flex grow-0 shrink-0 basis-auto lg:w-6/12 xl:w-4/12'>
-                <img src={cardImg} alt='Trendy Pants and Shoes' className='rounded-t-lg lg:rounded-tr-none lg:rounded-bl-lg sm:w-150 ' />
+                <img src={cardImg} alt='Trendy Pants and Shoes' className='w-80 pl-6 pt-6 rounded-t-lg lg:rounded-tr-none lg:rounded-bl-lg sm:w-150 md:ml-14 lg:ml-0 lg:pr-6 lg:mb-7'
+                />
               </div>
             </div>
           </div>

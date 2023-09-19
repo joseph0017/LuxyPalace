@@ -1,9 +1,11 @@
 
 import React, {useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
-import shoppingCart from '../images/shopping-cart.png';
+
 import { logoutRequest } from "../redux/user/user-actions";
 import { connect } from "react-redux";
+import { createStructuredSelector } from 'reselect'
+import { selectCurrentUser } from "../redux/user/user-selectors";
 
 const Navbar = ({user, logoutUser}) => {
   const [navbar, setNavbar] = useState(false);
@@ -96,8 +98,9 @@ const Navbar = ({user, logoutUser}) => {
             <>
          <div className='inline-flex  ml-12 sm:text-base pt-4 md:pt-0  '>
                       Welcome <span className="ml-4"> {user.username} </span> 
-                      <img src={shoppingCart} alt="cart" className="w-5 mt-1 ml-6" />
+                      
                     </div>
+                    
                     <p className="py-6 cursor-pointer border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300"
                     onClick={handleLogout}
                     >
@@ -115,11 +118,9 @@ const Navbar = ({user, logoutUser}) => {
 };
 
 
-function mapStateToProps (state) {
-  return {
-    user: state.user.user
-  };
-}
+const mapStateToProps = createStructuredSelector({
+  user: selectCurrentUser,
+})
 
 function mapDispatchToProps (dispatch) {
   return {

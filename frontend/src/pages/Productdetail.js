@@ -1,33 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import shoppingCart from '../images/shopping-cart.png';
+import { connect } from 'react-redux';
+import { getSingleProduct } from '../redux/product/product-actions';
+import { createStructuredSelector } from 'reselect';
+import { selectSingleProduct } from '../redux/product/product-selectors';
 
-const ProductDetail = () => {
+import { addItem, removeItem } from '../redux/cart/cart-actions';
+import ShoppingCart from '../components/ShoppingCart';
+import { selectCartItemsCount } from '../redux/cart/cart-selectors';
 
-  const {id} = useParams()
+const ProductDetail = ({fetchProduct, product, addItem, removeItem, countProduct}) => {
 
-    const [product, setProduct] = useState({});
-
-  const getProduct = async () => {
-    try {
-      const response = await fetch('http://127.0.0.1:8000/jewelry/' + id);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      setProduct(data); 
-    } catch (error) {
-      console.log('There was a problem with the fetch operation: ' + error.message);
-    }
-  }
+  const {id} = useParams();
 
   useEffect(() => {
-    getProduct();
+    fetchProduct(id);
   }
-  ,[])
+    , [fetchProduct, id]);
+
   return (
     <>
-      <div key={product.id} className='container px-6 py-16 mx-auto bg-gradient-to-t from-orange-100 mt-20 mb-48'>
+    <br />
+    <ShoppingCart />
+    <div key={product.id} className='container px-6 py-16 mx-auto bg-gradient-to-t from-orange-100 mb-48'>
       <div className='items-center lg:flex'>
         <div className='flex items-center justify-center w-full mt-6 lg:mt-0 lg:w-1/2'>
           <img className='w-96 h-full lg:max-w-3xl rounded-lg' src={product.image} alt='Catalogue-pana.svg' />
@@ -38,24 +34,26 @@ const ProductDetail = () => {
             <p className='mt-3 text-gray-600 dark:text-gray-400'>
               {product.description}
             </p>
-            <p className='text-2xl mt-10 mr-96'>
+            <p className='text-2xl mt-10 mr-96 sm:ml-48 md:ml-72 lg:ml-0'>
               <b>${product.price}</b>
             </p>
-            <div className='flex items-center'>
-              <div className='container rounded-full w-48 mt-14 bg-slate-200 cursor-pointer'>
+            <div className='flex items-center sm:ml-28 md:ml-48 lg:ml-0 '>
+              <div className=' rounded-full mt-14 bg-slate-200 cursor-pointer lg:px-2'>
                 <div className='flex items-center'>
-                  <p className='text-4xl ml-3 mb-2 cursor-pointer'>
+                  <p className='text-3xl pl-3 mb-2 cursor-pointer mr-1 lg:mr-5 lg:font-semibold ' onClick={() => removeItem(product)}>
                     -
                   </p>
-                  <p className='text-3xl ml-14 cursor-pointer'>
-                    0
+                  <p className='text-2xl ml-5 cursor-pointer lg:mr-3 lg:font-semibold'>
+                    {countProduct}
                   </p>
-                  <p className='text-4xl ml-14 mb-2 cursor-pointer'>
+                  <p className='text-3xl ml-7 mb-2 cursor-pointer lg:font-semibold lg:pr-2' onClick={() => addItem(product)} >
                     +
                   </p>
                 </div>
               </div>
-              <button className='text-2xl bg-orange-300 rounded-full px-9 py-2 flex flex-start mt-14 ml-20 hover:bg-orange-200'>
+              <button className='text-xl bg-orange-300 rounded-full flex flex-start mt-14 hover:bg-orange-200 ml-10 py-2 px-1 lg:px-12 lg:py-3 xl:ml-20'
+              onClick={() => addItem(product)}
+              >
                 <img src={shoppingCart} alt='cart' className='w-6 mt-1 mr-5' /> Add to cart
               </button>
             </div>
@@ -63,9 +61,21 @@ const ProductDetail = () => {
         </div>
       </div>
     </div>
-    
     </>
   );
 };
 
-export default ProductDetail;
+const mapStateToProps = createStructuredSelector({
+  product: selectSingleProduct,
+  countProduct: selectCartItemsCount
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchProduct: (id) => dispatch(getSingleProduct(id)),
+    addItem: (addproduct) => dispatch(addItem(addproduct)),
+    removeItem: (removeproduct) => dispatch(removeItem(removeproduct))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);

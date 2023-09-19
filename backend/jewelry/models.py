@@ -21,7 +21,3 @@ class Jewelry(models.Model):
 
     def __str__(self):
         return self.name
-
-    class Meta:
-        verbose_name = 'image'
-        verbose_name_plural = 'images'
