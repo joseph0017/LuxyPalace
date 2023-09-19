@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectAllProduct, selectAllProductCopy, selectCategory, selectSearch } from '../redux/product/product-selectors';
 import { getAllProducts, setSearch, setCategory, allProducts } from '../redux/product/product-actions';
-import ShoppingCart from '../components/ShoppingCart';
 
 const Product = ({products, productCopy, search, category, setFilteredProducts, setSearch, fetchAllProducts}) => {
 
