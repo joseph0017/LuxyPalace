@@ -1,12 +1,15 @@
 import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
+import { makeStripePayment } from '../redux/payment/payment-actions';
+import { connect } from 'react-redux';
 
-const StripeButton = ({ price }) => {
-  const priceForStripe = price * 100;
-  const publishableKey = 'pk_test_51JmETEEkCIACB3VhdUofkyWzHO51bWIG9CNewedJRgFcRWhj9YtfH14DvY1EGlkLOpNlN36KnQkN4PuqrId6n9yJ00btm6u4V1';
+const StripeButton = ({ price, stripePayday }) => {
+  const priceForStripe = price;
+  const publishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
 
   const onToken = token => {
     console.log(token);
+    stripePayday(token, priceForStripe);
     alert('Payment Successful');
   };
 
@@ -17,7 +20,7 @@ const StripeButton = ({ price }) => {
       billingAddress
       shippingAddress
       image=''
-      description={`Your total is $${price}`}
+      description={`Your total is ${price}`}
       amount={priceForStripe}
       panelLabel='Pay Now'
       token={onToken}
@@ -25,4 +28,8 @@ const StripeButton = ({ price }) => {
   );
 };
 
-export default StripeButton;
+const mapDispatchToProps = (dispatch) => ({
+  stripePayday: (token, amount) => dispatch(makeStripePayment(token, amount))
+});
+
+export default connect(null, mapDispatchToProps)(StripeButton);
