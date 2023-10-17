@@ -12,7 +12,7 @@ export const paymentFailure = () => ({
 export const makeStripePayment = (token, amount, name, email, address_city, address_country) => {
   return async (dispatch) => {
     dispatch(paymentSuccess(token, amount, name, email, address_city, address_country));
-    await fetch('http://localhost:8000/stripe-payment/', {
+    await fetch('https://joe00017.pythonanywhere.com/stripe-payment/', {
       method: 'POST',
         headers: {
             'Content-Type':'application/json'

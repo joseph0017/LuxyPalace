@@ -32,7 +32,7 @@ export const setCategory = (category) => ({
 export const getSingleProduct = (id) => {
     return async (dispatch) => {
     try {
-        const response = await fetch('http://127.0.0.1:8000/jewelry/' + id);
+        const response = await fetch('https://joe00017.pythonanywhere.com/jewelry/' + id);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -48,7 +48,7 @@ export const getSingleProduct = (id) => {
 export const getAllProducts = () => {
     return async (dispatch) => {
     try {
-        const response = await fetch('http://127.0.0.1:8000/jewelry-list/');
+        const response = await fetch('https://joe00017.pythonanywhere.com/jewelry-list/');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }

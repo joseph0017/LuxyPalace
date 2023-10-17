@@ -89,29 +89,29 @@ const Navbar = ({user, logoutUser}) => {
                       Contact
                     </Link>
                     </li>
-                </ul>     
-            </div>
-        </div>
 
-        
-         { user ? (
+                    { user ? (
             <>
-         <div className='inline-flex  ml-12 sm:text-base pt-4 md:pt-0  '>
+                   <div className='inline-flex sm:text-base md:pt-0 lg:pl-48 lg:pr-16 '>
                       Welcome <span className="ml-4"> {user.username} </span> 
                       
                     </div>
                     
-                    <p className="py-6 cursor-pointer border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300"
+                    <p className="py-1 cursor-pointer border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300"
                     onClick={handleLogout}
                     >
                         Sign Out</p>
                     </>
-        ) : (
-            <Link className='border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300 mx-1.5 sm:mx-6 text-base' to='/login'>
-                      Log in
-                    </Link>
-        )
-        }               
+                ) : (
+                    <Link className='border-b-2 border-transparent hover:text-orange-800 transition-colors duration-300 transform dark:hover:text-gray-200 hover:border-orange-300 mx-1.5 sm:mx-6 text-base' to='/login'>
+                              Log in
+                            </Link>
+                )
+                }  
+                </ul>     
+            </div>
+        </div>
+             
     </div>
 </nav>
   );
